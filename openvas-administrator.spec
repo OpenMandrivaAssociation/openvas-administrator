@@ -1,7 +1,7 @@
 Summary: 	Provide a unified access for various administrative tasks
 Name:		openvas-administrator
 Version:	1.1.1
-Release:	%mkrel 1
+Release:	%mkrel 2
 Source:		http://wald.intevation.org/frs/download.php/561/%name-%version.tar.gz
 Patch0:		openvas-administrator-1.1.1-build.patch
 Group:		System/Configuration/Networking
@@ -40,5 +40,5 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/openvas/openvasad_log.conf
 %{_sbindir}/openvasad
-%{_mandir}/man8/openvasad.8.xz
+%{_mandir}/man8/openvasad.8.*
 %{_datadir}/openvas/openvasad
