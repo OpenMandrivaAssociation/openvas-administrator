@@ -1,15 +1,14 @@
 Summary: 	Provide a unified access for various administrative tasks
 Name:		openvas-administrator
-Version:	1.1.1
-Release:	%mkrel 2
-Source:		http://wald.intevation.org/frs/download.php/561/%name-%version.tar.gz
-Patch0:		openvas-administrator-1.1.1-build.patch
-Group:		System/Configuration/Networking
-Url:		http://www.openvas.org
+Version:	1.1.2
+Release:	%mkrel 1
 License:	GPLv2+
-BuildRoot:	%{_tmppath}/%name-%{version}-root
+Group:		System/Configuration/Networking
+URL:		http://www.openvas.org
+Source:		http://wald.intevation.org/frs/download.php/561/%name-%version.tar.gz
 BuildRequires:	cmake
 BuildRequires:	openvas-devel >= 4.0
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
 The mission of OpenVAS Administrator is to provide a unified access
@@ -21,7 +20,6 @@ direct changes on the respective system and as a remote service.
 
 %prep
 %setup -q -n %name-%version
-%patch0 -p0
 
 sed -i -e 's#-Werror##' CMakeLists.txt
 
@@ -30,11 +28,12 @@ sed -i -e 's#-Werror##' CMakeLists.txt
 %make
 
 %install
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
+
 %makeinstall_std -C build
 
 %clean
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)
