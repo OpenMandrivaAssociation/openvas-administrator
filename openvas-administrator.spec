@@ -1,14 +1,15 @@
 Summary: 	Provide a unified access for various administrative tasks
 Name:		openvas-administrator
 Version:	1.1.2
-Release:	%mkrel 1
-License:	GPLv2+
+Release:	2
+Source0:		http://wald.intevation.org/frs/download.php/561/%name-%version.tar.gz
+source1:	.abf.yml
 Group:		System/Configuration/Networking
-URL:		http://www.openvas.org
-Source:		http://wald.intevation.org/frs/download.php/561/%name-%version.tar.gz
+Url:		http://www.openvas.org
+License:	GPLv2+
 BuildRequires:	cmake
-BuildRequires:	openvas-devel >= 4.0
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
+BuildRequires:	openvas-devel
+buildrequires:	xmltoman
 
 %description
 The mission of OpenVAS Administrator is to provide a unified access
@@ -24,20 +25,27 @@ direct changes on the respective system and as a remote service.
 sed -i -e 's#-Werror##' CMakeLists.txt
 
 %build
+export LDFLAGS="-lglib-2.0"
 %cmake
 %make
 
 %install
-rm -rf %{buildroot}
-
 %makeinstall_std -C build
-
-%clean
-rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/openvas/openvasad_log.conf
 %{_sbindir}/openvasad
 %{_mandir}/man8/openvasad.8.*
-%{_datadir}/openvas/openvasad
+%attr(644,root,root) %{_datadir}/openvas/openvasad/global_schema_formats/*/*
+
+
+%changelog
+* Thu Sep 08 2011 Luis Daniel Lucio Quiroz <dlucio@mandriva.org> 1.1.1-2mdv2011.0
++ Revision: 699042
+- backport fixes
+
+* Sat Apr 02 2011 Funda Wang <fwang@mandriva.org> 1.1.1-1
++ Revision: 649815
+- import openvas-administrator
+
