@@ -1,7 +1,7 @@
 Summary: 	Provide a unified access for various administrative tasks
 Name:		openvas-administrator
 Version:	1.1.2
-Release:	2
+Release:	3
 Source0:		http://wald.intevation.org/frs/download.php/561/%name-%version.tar.gz
 source1:	.abf.yml
 Group:		System/Configuration/Networking
